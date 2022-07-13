@@ -1,6 +1,7 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QHBoxLayout
 
 
 class MainWidget(QWidget):
@@ -15,8 +16,28 @@ class MainWidget(QWidget):
         self.resize(780, 400)
         self.setWindowTitle('抖音下载器(无水印)')
 
+        # 创建一个输入框
+        self.url_input = QLineEdit()
+
+        # 创建一个按钮
+        download_btn = QPushButton("开始下载")
+        download_btn.clicked.connect(self.click_handle)
+
+        # 创建一个水平布局容器
+        h_layout = QHBoxLayout()
+
+        # 将输入框、按钮添加到水平布局容器
+        h_layout.addWidget(self.url_input, 0, Qt.AlignTop)  # 水平居上
+        h_layout.addWidget(download_btn, 0, Qt.AlignTop)  # 水平居上
+
+        # 将水平布局容器添加到本widget
+        self.setLayout(h_layout)
+
         # 显示在屏幕上
         self.show()
+
+    def click_handle(self):
+        print("点击了 开始下载按钮...")
 
 
 if __name__ == '__main__':
